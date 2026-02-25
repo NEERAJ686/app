@@ -61,8 +61,6 @@ st.markdown('''
 # Step -2: Data Initialization and Sentiment Engine
 if 'db' not in st.session_state:
     st.session_state.db = []
-
-
 if 'p' not in st.session_state:
     st.session_state.p = {
         "Pizza": {
@@ -86,8 +84,6 @@ if 'p' not in st.session_state:
             "icon": "https://www.cookwithmanali.com/wp-content/uploads/2019/09/Vegetable-Biryani-Restaurant-Style.jpg"
         }
     }
-
-
 def analyse(t):
     t = t.lower()
     p_words = ["delicious", "good", "wonderful", "happy", "best", "tasty", "love"]
@@ -97,12 +93,8 @@ def analyse(t):
     if p > n: return "Positive☺️", "#2E7D32"
     elif n > p: return "Negative🥲", "#D32F2F"
     else: return "Neutral🫠", "#FFA000"
-
-
 # Step -3: Sidebar Navigation
 option = st.sidebar.radio("Navigation", ["Feedback", "Analytics"])
-
-
 if option == "Feedback":
     st.subheader("Explore Our Menu")
     cols = st.columns(5)
@@ -137,8 +129,6 @@ if option == "Feedback":
                         ''', unsafe_allow_html=True)
                 else:
                     st.caption("No reviews yet.")
-
-
     st.divider()
     st.subheader("Share Your Experience")
     c1, c2 = st.columns(2)
@@ -168,8 +158,6 @@ if option == "Feedback":
                     time.sleep(2)
                     st.success("Thank you for your feedback!")
                     st.rerun()
-
-
 # Step -4: Analytics Section
 elif option == "Analytics":
     st.subheader("Performance Insights")
@@ -185,8 +173,6 @@ elif option == "Analytics":
         with c2:
             fig1 = px.area(df.groupby("prod")["rating"].mean().reset_index(), x="prod", y="rating", title="Average Rating by Item")
             st.plotly_chart(fig1, use_container_width=True)
-
-
         df = df.sort_values("time", ascending=True)
         st.subheader("| Recent Reviews")
         for _, row in df.iterrows():
